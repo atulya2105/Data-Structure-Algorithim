@@ -14,17 +14,17 @@
  * }
  */
 class Solution {
-    int mxLevel = 0;
+   // int mxLevel = 0;
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
-        post(root,1,ans);
+        post(root,0,ans);
         return ans;
     }
     public void post(TreeNode root, int level, List<Integer> ans){
         if(root==null) return;
-        if(mxLevel<level){
+        if(level==ans.size()){
             ans.add(root.val);
-            mxLevel = level;
+            //mxLevel = level;
         }
         post(root.right,level+1,ans);
         post(root.left,level+1,ans);
