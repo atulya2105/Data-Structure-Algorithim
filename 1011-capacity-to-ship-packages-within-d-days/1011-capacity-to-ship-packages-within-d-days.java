@@ -4,6 +4,7 @@ class Solution {
         int high = 0;
         for(int i= 0;i<weights.length;i++){
             high = high + weights[i];
+            low = Math.min(low,weights[i]);
         }
         int ans = 0;
         while(low<=high){
