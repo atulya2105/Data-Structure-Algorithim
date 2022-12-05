@@ -1,27 +1,40 @@
 class BrowserHistory {
-    String[] arr;
-    int pre,right;
+    class Node{
+        String url;
+        Node next, prev;
+        public Node(String url) {
+            this.url = url;
+            next = null;
+            prev = null;
+        }
+    }
+    Node head,curr;
     public BrowserHistory(String homepage) {
-        arr = new String[5000];
-        int pre = 0;
-        int right = 0;
-        arr[pre] = homepage;
+        head = new Node(homepage);
+        curr = head;
     }
     
     public void visit(String url) {
-        pre++;
-        arr[pre] = url;
-        right = pre;
+        Node node = new Node(url);
+        curr.next = node;
+        node.prev = curr;
+        curr = node;
+        
     }
     
     public String back(int steps) {
-        pre = Math.max(0,pre-steps);
-        return arr[pre];
+       while (curr.prev != null && steps-- > 0) {
+            curr = curr.prev;
+        }
+        return curr.url;
     }
     
     public String forward(int steps) {
-        pre = Math.min(right,pre+steps);
-        return arr[pre];
+        while(curr.next!=null && steps-- >0  ){
+            curr = curr.next;
+           // steps--;
+        }
+        return curr.url;
     }
 }
 
