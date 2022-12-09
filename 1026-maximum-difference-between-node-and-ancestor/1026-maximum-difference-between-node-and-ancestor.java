@@ -19,17 +19,16 @@ class Solution {
         if(root == null){
             return 0;
         }
-        helper(root,root.val,root.val);
-        return ans;
+        
+        return helper(root,root.val,root.val);
     }
-    void helper(TreeNode node, int mx, int mn){
-        if(node==null) return ;
-        int temp = Math.max(Math.abs(mx-node.val),Math.abs(mn-node.val));
-        ans = Math.max(temp,ans);
+    int helper(TreeNode node, int mx, int mn){
+        if(node==null) return mx-mn;
+        
         mx = Math.max(mx,node.val);
         mn = Math.min(mn,node.val);
-        helper(node.left,mx,mn);
-        helper(node.right,mx,mn);
-        return;
+        int left =  helper(node.left,mx,mn);
+        int right =  helper(node.right,mx,mn);
+        return Math.max(left,right);
     }
 }
