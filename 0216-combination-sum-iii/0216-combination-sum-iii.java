@@ -6,13 +6,28 @@ class Solution {
             ans.add(comb);
             return ;
         }
-        for(int j = i;j<=9;j++){
-            ls.add(j);
-            helper(j+1,ls,k,t-j);
-            ls.remove(ls.size()-1);
+        // for(int j = i;j<=9;j++){
+        //     ls.add(j);
+        //     helper(j+1,ls,k,t-j);
+        //     ls.remove(ls.size()-1);
+        // }
+        if(i==10){
+            return ;
+            
+        }
+        if(k<0 || t<0){
+            return ;
         }
         
         // for skipping the element
+        helper(i+1,ls,k,t);
+        
+        // for including the element in the list
+        ls.add(i);
+        helper(i+1,ls,k,t-i);
+        ls.remove(ls.size()-1);
+        
+       
         
         return ;
     }
