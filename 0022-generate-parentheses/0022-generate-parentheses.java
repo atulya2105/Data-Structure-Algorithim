@@ -7,11 +7,13 @@ class Solution {
             String temp = s;
             temp += '(';
             genrate(temp,open-1,close,ans);
+            //temp.replace(temp.charAt(temp.length()-1),"");
         }
         if(open<close){
             String temp = s;
             temp += ')';
             genrate(temp,open,close-1,ans);
+            //temp.replace(temp.charAt(temp.length()-1),"");
         }
     }
     public List<String> generateParenthesis(int n) {
