@@ -1,16 +1,18 @@
 class Solution {
-public:
-    int findMinArrowShots(vector<vector<int>>& p) {
-        sort(p.begin(), p.end());
-        int lastpoint = p[0][1];
-        int ans = 1;
-        for(auto point : p) {
-            if(point[0] > lastpoint) {
-                ans++;
-                lastpoint = point[1];
+    public int findMinArrowShots(int[][] points) {
+        
+        Arrays.sort(points,(a,b)-> Integer.compare(a[1],b[1]));
+        int lastPoint = points[0][1];
+        int cnt = 1;
+        for(int[] p : points){
+            if(p[0]>lastPoint){
+                cnt++;
+                lastPoint = p[1];
             }
-            lastpoint = min(point[1],lastpoint);
+            lastPoint = Math.min(lastPoint,p[1]);
+            
         }
-        return ans;
+        return cnt;
+        
     }
-};
+}
