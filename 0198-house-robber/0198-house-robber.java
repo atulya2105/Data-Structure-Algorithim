@@ -9,9 +9,21 @@ class Solution {
     // }
     // return Math.max(prevNo, prevYes);
         // Memorization method
-        int[] dp = new int[nums.length];
-        Arrays.fill(dp,-1);
-        return helper(nums,nums.length-1,dp);
+        // int[] dp = new int[nums.length];
+        // Arrays.fill(dp,-1);
+        // return helper(nums,nums.length-1,dp);
+        
+        int include = nums[0];
+		int exclude = 0;
+		for(int i = 1;i<nums.length;i++){
+			int newInclude = exclude + nums[i];
+			int newExclude = Math.max(include,exclude);
+			include = newInclude;
+			exclude = newExclude;
+		}
+
+		return Math.max(include,exclude);
+        
     }
     int helper(int[] nums, int idx,int[] dp){
         if(idx==0) return nums[idx];
