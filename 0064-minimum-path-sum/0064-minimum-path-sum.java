@@ -14,24 +14,44 @@ class Solution {
         int m = arr.length;
 		int n = arr[0].length;
 		int[][] dp = new int[m][n];
-		for(int i = 0;i<m;i++){
+		// for(int i = 0;i<m;i++){
+		// 	for(int j = 0;j<n;j++){
+		// 		int up = Integer.MAX_VALUE;
+		// 		int left = Integer.MAX_VALUE;
+		// 	    if(i==0 && j==0){
+		// 			dp[i][j] = arr[i][j];
+		// 		}else{
+		// 			if(i>0){
+		// 				up = arr[i][j] + dp[i-1][j];
+		// 			}
+		// 			if(j>0){
+		// 				left = arr[i][j] + dp[i][j-1];
+		// 			}
+		// 			dp[i][j] = Math.min(up,left);
+		// 		}
+		// 	}
+		// }
+        int[] prev = new int[n];
+        for(int i = 0;i<m;i++){
+            int[] curr = new int[n];
 			for(int j = 0;j<n;j++){
 				int up = Integer.MAX_VALUE;
 				int left = Integer.MAX_VALUE;
 			    if(i==0 && j==0){
-					dp[i][j] = arr[i][j];
+					curr[j] = arr[i][j];
 				}else{
 					if(i>0){
-						up = arr[i][j] + dp[i-1][j];
+						up = arr[i][j] + prev[j];
 					}
 					if(j>0){
-						left = arr[i][j] + dp[i][j-1];
+						left = arr[i][j] + curr[j-1];
 					}
-					dp[i][j] = Math.min(up,left);
+					curr[j] = Math.min(up,left);
 				}
 			}
+            prev = curr;
 		}
 		
-		return dp[m-1][n-1];
+		return prev[n-1];
     }
 }
